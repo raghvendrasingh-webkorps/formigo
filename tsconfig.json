@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    /* Output */
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    /* Module & Target */
+    "module": "ESNext",
+    "target": "ES2019",
+    "moduleResolution": "Node",
+
+    /* Type Declarations */
+    "declaration": true,
+    "declarationMap": false,
+    "sourceMap": true,
+
+    /* Strictness */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    /* Interop */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Performance */
+    "skipLibCheck": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
+
+
