@@ -1,2 +1,2 @@
-export {formigo} from "./formigo";
+export {formigo} from "./core/formigo";
 

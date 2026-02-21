@@ -1,11 +1,11 @@
-interface FormigoConfig<T> {
+export interface FormigoConfig<T> {
   initialValues: T
   validate?: (values: T) => Partial<Record<keyof T, string>>
   onSubmit?: (values:T) => void
 }
 
 
-interface FormigoState<T> {
+export interface FormigoState<T> {
   values : T
   errors: Partial<Record<keyof T, string>>
   touched: Partial<Record<keyof T, boolean>>
@@ -26,17 +26,19 @@ export function formigo<T extends Object> (config: FormigoConfig<T>) {
   type Listener <T> = (state: FormigoState<T>)=> void;
   let listeners : Listener<T>[] = [];
 
-  function subscribe(listener: Listener<T>){
-    listeners.push(listener);
-  }
+function subscribe(listener: Listener<T>) {
+  listeners.push(listener);
 
+  return () => {
+    listeners = listeners.filter(l => l !== listener);
+  };
+}
 
   function notify (){
     listeners.forEach((listener) => {
       listener(getValues());
     })
   }
-
 
   function setValue<K extends keyof T>(field: K, value: T[K]){
     state.values[field] = value;
@@ -70,7 +72,7 @@ export function formigo<T extends Object> (config: FormigoConfig<T>) {
 
     
     runValidation();
-    notify();
+    // notify();
 
     if(Object.keys(state.errors).length === 0 ) {
 
@@ -97,7 +99,6 @@ export function formigo<T extends Object> (config: FormigoConfig<T>) {
     getValues,
     subscribe
   }
-
 }
 
 
